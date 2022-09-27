@@ -1,0 +1,15 @@
+D:\Traineeship\Tote\Tote.Infrastructure\bin\Debug\net6.0\Tote.Infrastructure.deps.json
+D:\Traineeship\Tote\Tote.Infrastructure\bin\Debug\net6.0\Tote.Infrastructure.dll
+D:\Traineeship\Tote\Tote.Infrastructure\bin\Debug\net6.0\Tote.Infrastructure.pdb
+D:\Traineeship\Tote\Tote.Infrastructure\bin\Debug\net6.0\Tote.Application.dll
+D:\Traineeship\Tote\Tote.Infrastructure\bin\Debug\net6.0\Tote.Application.pdb
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.csproj.AssemblyReference.cache
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.AssemblyInfoInputs.cache
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.AssemblyInfo.cs
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.csproj.CopyComplete
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.dll
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\refint\Tote.Infrastructure.dll
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\Tote.Infrastructure.pdb
+D:\Traineeship\Tote\Tote.Infrastructure\obj\Debug\net6.0\ref\Tote.Infrastructure.dll

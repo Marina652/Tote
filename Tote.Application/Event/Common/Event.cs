@@ -8,7 +8,7 @@ namespace Tote.Application.Event.Common
 {
     public class Event
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -18,6 +18,6 @@ namespace Tote.Application.Event.Common
 
         public DateTime EndDate { get; set; }
 
-        public int SportTypeId { get; set; }
+        public Guid SportTypeId { get; set; }
     }
 }

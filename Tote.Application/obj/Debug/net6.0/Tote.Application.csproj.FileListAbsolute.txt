@@ -1,0 +1,12 @@
+D:\Traineeship\Tote\Tote.Application\bin\Debug\net6.0\Tote.Application.deps.json
+D:\Traineeship\Tote\Tote.Application\bin\Debug\net6.0\Tote.Application.dll
+D:\Traineeship\Tote\Tote.Application\bin\Debug\net6.0\Tote.Application.pdb
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.csproj.AssemblyReference.cache
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.AssemblyInfoInputs.cache
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.AssemblyInfo.cs
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.csproj.CoreCompileInputs.cache
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.dll
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\refint\Tote.Application.dll
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\Tote.Application.pdb
+D:\Traineeship\Tote\Tote.Application\obj\Debug\net6.0\ref\Tote.Application.dll

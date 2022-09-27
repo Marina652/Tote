@@ -8,6 +8,6 @@ namespace Tote.Application.Event.Interfaces
 {
     public interface IEventReader
     {
-        ValueTask<Common.Event> ReadByIdAsync(int id, CancellationToken token);
+        ValueTask<Common.Event> ReadByIdAsync(Guid id, CancellationToken token);
     }
 }
