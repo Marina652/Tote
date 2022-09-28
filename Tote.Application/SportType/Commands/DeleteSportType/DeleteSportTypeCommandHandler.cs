@@ -10,9 +10,9 @@ namespace Tote.Application.SportType.Commands.DeleteSportType
 {
     internal class DeleteSportTypeCommandHandler : IRequestHandler<DeleteSportTypeCommand>
     {
-        private readonly ISportTypeRemover _sportTypeRemover;
+        private readonly ISportTypeWriter _sportTypeRemover;
 
-        public DeleteSportTypeCommandHandler(ISportTypeRemover sportTypeRemover)
+        public DeleteSportTypeCommandHandler(ISportTypeWriter sportTypeRemover)
         {
             _sportTypeRemover = sportTypeRemover;
         }

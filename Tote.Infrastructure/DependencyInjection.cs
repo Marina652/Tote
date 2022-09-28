@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Data;
+using System.Data.SqlClient;
 using Tote.Application.Event.Interfaces;
 using Tote.Application.SportType.Interfaces;
 using Tote.Infrastructure.Repositories.Event;
@@ -8,32 +11,16 @@ namespace Tote.Infrastructure
 {
     public static class DependencyInjections
     {
-        //public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfifuration confifuration, string connectionString)
-        //{
-        //    var dbTotalConnectionSrtring = new DBTotalConnectionstring()
-        //    {
-        //        Value = confifuration.GetConnectionString();
-        //    }
-
-        //    services.Configure(dbTotalConnectionSrtring);
-        //    services.AddTransient<IEventReader, EventReadRepository>(provider => new EventReadRepository(connectionString));
-        //    services.AddTransient<IEventRemover, EventRemoveRepository>(provider => new EventRemoveRepository(connectionString));
-        //    services.AddTransient<IEventWriter, EventCreateRepository>(provider => new EventCreateRepository(connectionString));
-        //    services.AddTransient<IEventUpdater, EventUpdateRepository>(provider => new EventUpdateRepository(connectionString));
-
-        //    services.AddTransient<ISportTypeReader, SportTypeReadRepository>(provider => new SportTypeReadRepository(connectionString));
-        //    services.AddTransient<ISportTypeRemover, SportTypeRemoveRepository>(provider => new SportTypeRemoveRepository(connectionString));
-
-        //    return services;
-        //}
-
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IEventReader, EventReadRepository>(provider => new EventReadRepository(connectionString));
-            services.AddTransient<IEventWriter, EventWriteRepository>(provider => new EventWriteRepository(connectionString));
+            string dbConnectionString = configuration.GetConnectionString("ConnectionString");
+            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
 
-            services.AddTransient<ISportTypeReader, SportTypeReadRepository>(provider => new SportTypeReadRepository(connectionString));
-            services.AddTransient<ISportTypeRemover, SportTypeRemoveRepository>(provider => new SportTypeRemoveRepository(connectionString));
+            services.AddTransient<IEventReader, EventReadRepository>();
+            services.AddTransient<IEventWriter, EventWriteRepository>();
+
+            services.AddTransient<ISportTypeReader, SportTypeReadRepository>();
+            services.AddTransient<ISportTypeWriter, SportTypeWriteRepository>();
 
             return services;
         }

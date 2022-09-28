@@ -14,18 +14,15 @@ namespace Tote.Infrastructure.Repositories.Event
 {
     internal class EventReadRepository : IEventReader
     {
-        string connectionString = null;
-        public EventReadRepository(string conn)
+        private readonly IDbConnection _dbConnection;
+        public EventReadRepository(IDbConnection dbConnection)
         {
-            connectionString = conn;
+            _dbConnection = dbConnection;
         }
 
         public async ValueTask<Application.Event.Common.Event> ReadByIdAsync(Guid id, CancellationToken token)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                return (await db.QueryAsync<Application.Event.Common.Event>("SELECT * FROM Event WHERE Id = @id", new { id })).FirstOrDefault();
-            }
+            return (await _dbConnection.QueryAsync<Application.Event.Common.Event>("SELECT * FROM Event WHERE Id = @id", new { id })).FirstOrDefault();
         }
     }
 }

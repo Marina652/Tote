@@ -12,18 +12,15 @@ namespace Tote.Infrastructure.Repositories.SportType
 {
     internal class SportTypeReadRepository : ISportTypeReader
     {
-        string connectionString = null;
-        public SportTypeReadRepository(string conn)
+        private readonly IDbConnection _dbConnection;
+        public SportTypeReadRepository(IDbConnection dbConnection)
         {
-            connectionString = conn;
+            _dbConnection = dbConnection;
         }
 
         public async ValueTask<Application.SportType.Common.SportType> ReadByIdAsync(Guid id, CancellationToken token)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                return (await db.QueryAsync<Application.SportType.Common.SportType>("SELECT * FROM SportType WHERE Id = @id", new { id })).FirstOrDefault();
-            }
+            return (await _dbConnection.QueryAsync<Application.SportType.Common.SportType>("SELECT * FROM SportType WHERE Id = @id", new { id })).FirstOrDefault();
         }
     }
 }
