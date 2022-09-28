@@ -8,7 +8,8 @@ namespace Tote.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
         {
-            services.AddSingleton<IEventReader, EventReadRepository>(provider => new EventReadRepository(connectionString));
+            services.AddTransient<IEventReader, EventReadRepository>(provider => new EventReadRepository(connectionString));
+            services.AddTransient<IEventRemover, EventRemoveRepository>(provider => new EventRemoveRepository(connectionString));
 
             return services;
         }

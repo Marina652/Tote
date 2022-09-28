@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Tote.Application.Event.Commands.DeleteEvent;
 using Tote.Application.Event.Queries.GetEventById;
 
 namespace Tote.Api.Controllers
@@ -24,6 +25,17 @@ namespace Tote.Api.Controllers
                 token);
 
             return Ok(foundEvent);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id,
+       CancellationToken token)
+        {
+            await _mediator.Send(
+                new DeleteEventCommand(id),
+                token);
+
+            return Ok();
         }
     }
 }
