@@ -6,15 +6,15 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tote.Application.Event.Interfaces;
+using Tote.Application.SportType.Interfaces;
 
-namespace Tote.Infrastructure.Repositories.Event
+namespace Tote.Infrastructure.Repositories.SportType
 {
-    internal class EventRemoveRepository : IEventRemover
+    internal class SportTypeRemoveRepository : ISportTypeRemover
     {
         string connectionString = null;
 
-        public EventRemoveRepository(string conn)
+        public SportTypeRemoveRepository(string conn)
         {
             connectionString = conn;
         }
@@ -23,7 +23,7 @@ namespace Tote.Infrastructure.Repositories.Event
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                    await db.ExecuteAsync("DELETE Event WHERE Id = @id", new { id });       
+                await db.ExecuteAsync("DELETE SportType WHERE Id = @id", new { id });
             }
         }
     }

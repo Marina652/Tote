@@ -10,16 +10,16 @@ namespace Tote.Application.Event.Commands.UpdateEvent
 {
     internal class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand>
     {
-        private readonly IEventUpdater _eventUpdater;
+        private readonly IEventWriter _eventWriter;
 
-        public UpdateEventCommandHandler(IEventUpdater eventUpdater)
+        public UpdateEventCommandHandler(IEventWriter eventWriter)
         {
-            _eventUpdater = eventUpdater;
+            _eventWriter = eventWriter;
         }
 
         public async Task<Unit> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
-            await _eventUpdater.UpdateAsync(request.NewEvent, cancellationToken);
+            await _eventWriter.UpdateAsync(request.NewEvent, cancellationToken);
             return Unit.Value;
         }
     }

@@ -10,16 +10,16 @@ namespace Tote.Application.Event.Commands.DeleteEvent
 {
     internal class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand>
     {
-        private readonly IEventRemover _eventRemover;
+        private readonly IEventWriter _eventWriter;
 
-        public DeleteEventCommandHandler(IEventRemover eventRemover)
+        public DeleteEventCommandHandler(IEventWriter eventWriter)
         {
-            _eventRemover = eventRemover;
+            _eventWriter = eventWriter;
         }
 
         public async Task<Unit> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
         {
-            await _eventRemover.RemoveByIdAsync(request.Id, cancellationToken);
+            await _eventWriter.RemoveByIdAsync(request.Id, cancellationToken);
             return Unit.Value;
         }
     }

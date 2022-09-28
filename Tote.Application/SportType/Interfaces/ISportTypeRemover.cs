@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tote.Application.Event.Interfaces
+namespace Tote.Application.SportType.Interfaces
 {
-    public interface IEventRemover
+    public interface ISportTypeRemover
     {
         ValueTask RemoveByIdAsync(Guid id, CancellationToken token);
     }
