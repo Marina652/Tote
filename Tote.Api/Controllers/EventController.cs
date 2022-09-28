@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Event.Commands.CreateEvent;
 using Tote.Application.Event.Commands.DeleteEvent;
+using Tote.Application.Event.Commands.UpdateEvent;
 using Tote.Application.Event.Common;
 using Tote.Application.Event.Queries.GetEventById;
 
@@ -35,6 +36,17 @@ namespace Tote.Api.Controllers
         {
             await _mediator.Send(
                 new CreateEventCommand(newEvent),
+                token);
+
+            return Ok();
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> Update(Event newEvent,
+            CancellationToken token)
+        {
+            await _mediator.Send(
+                new UpdateEventCommand(newEvent),
                 token);
 
             return Ok();
