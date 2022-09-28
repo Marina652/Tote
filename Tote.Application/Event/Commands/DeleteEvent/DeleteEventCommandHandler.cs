@@ -8,11 +8,11 @@ using Tote.Application.Event.Interfaces;
 
 namespace Tote.Application.Event.Commands.DeleteEvent
 {
-    internal class DeleteEventHandler : IRequestHandler<DeleteEventCommand>
+    internal class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand>
     {
         private readonly IEventRemover _eventRemover;
 
-        public DeleteEventHandler(IEventRemover eventRemover)
+        public DeleteEventCommandHandler(IEventRemover eventRemover)
         {
             _eventRemover = eventRemover;
         }

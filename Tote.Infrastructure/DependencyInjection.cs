@@ -10,6 +10,7 @@ namespace Tote.Infrastructure
         {
             services.AddTransient<IEventReader, EventReadRepository>(provider => new EventReadRepository(connectionString));
             services.AddTransient<IEventRemover, EventRemoveRepository>(provider => new EventRemoveRepository(connectionString));
+            services.AddTransient<IEventWriter, EventCreateRepository>(provider => new EventCreateRepository(connectionString));
 
             return services;
         }

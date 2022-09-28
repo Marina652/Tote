@@ -1,17 +1,19 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Tote.Application.Event.Commands.CreateEvent;
 using Tote.Application.Event.Commands.DeleteEvent;
+using Tote.Application.Event.Common;
 using Tote.Application.Event.Queries.GetEventById;
 
 namespace Tote.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Event : ControllerBase
+    public class EventController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public Event(IMediator mediator)
+        public EventController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -27,9 +29,20 @@ namespace Tote.Api.Controllers
             return Ok(foundEvent);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(Event newEvent,
+            CancellationToken token)
+        {
+            await _mediator.Send(
+                new CreateEventCommand(newEvent),
+                token);
+
+            return Ok();
+        }
+
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid id,
-       CancellationToken token)
+            CancellationToken token)
         {
             await _mediator.Send(
                 new DeleteEventCommand(id),
