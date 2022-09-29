@@ -2,7 +2,7 @@
 {
     public interface IEventWriter
     {
-        ValueTask WriteAsync(Common.Event newEvent, CancellationToken token);
+        ValueTask<Guid> WriteAsync(Common.Event newEvent, CancellationToken token);
 
         ValueTask UpdateAsync(Common.Event newEvent, CancellationToken token);
 

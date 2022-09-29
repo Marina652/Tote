@@ -3,7 +3,7 @@ using Tote.Application.Event.Interfaces;
 
 namespace Tote.Application.Event.Commands.CreateEvent
 {
-    internal class CreateEventCommandHandler : IRequestHandler<CreateEventCommand>
+    internal class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Guid>
     {
         private readonly IEventWriter _eventWriter;
 
@@ -12,10 +12,9 @@ namespace Tote.Application.Event.Commands.CreateEvent
             _eventWriter = eventWriter;
         }
 
-        public async Task<Unit> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
-            await _eventWriter.WriteAsync(request.NewEvent, cancellationToken);
-            return Unit.Value;
+            return await _eventWriter.WriteAsync(request.NewEvent, cancellationToken);
         }
     }
 }

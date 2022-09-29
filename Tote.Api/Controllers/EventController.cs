@@ -34,11 +34,11 @@ namespace Tote.Api.Controllers
         public async Task<IActionResult> Create(Event newEvent,
             CancellationToken token)
         {
-            await _mediator.Send(
+            var createdGuid = await _mediator.Send(
                 new CreateEventCommand(newEvent),
                 token);
 
-            return Ok();
+            return Ok(createdGuid);
         }
 
         [HttpPatch]

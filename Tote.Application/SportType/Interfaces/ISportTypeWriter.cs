@@ -8,7 +8,7 @@ namespace Tote.Application.SportType.Interfaces
 {
     public interface ISportTypeWriter
     {
-        ValueTask WriteAsync(Common.SportType newSportType, CancellationToken token);
+        ValueTask<Guid> WriteAsync(Common.SportType newSportType, CancellationToken token);
 
         ValueTask UpdateAsync(Common.SportType newSportType, CancellationToken token);
 
