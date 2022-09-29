@@ -9,6 +9,7 @@ using Dapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
+using Tote.Application.Event.Common;
 
 namespace Tote.Infrastructure.Repositories.Event
 {
@@ -20,9 +21,15 @@ namespace Tote.Infrastructure.Repositories.Event
             _dbConnection = dbConnection;
         }
 
-        public async ValueTask<Application.Event.Common.Event> ReadByIdAsync(Guid id, CancellationToken token)
+        public async ValueTask<FoundEvent> ReadByIdAsync(Guid id, CancellationToken token)
         {
-            return (await _dbConnection.QueryAsync<Application.Event.Common.Event>("SELECT * FROM Event WHERE Id = @id", new { id })).FirstOrDefault();
+            var sql =
+            "SELECT Event.Id, Event.Name, Description, StartDate, EndDate, SportType.Name AS SportTypeName " +
+            "FROM Event " +
+            "JOIN dbo.SportType ON SportType.Id = Event.SportTypeId " +
+            "WHERE Event.Id = @id";
+
+            return (await _dbConnection.QueryAsync<FoundEvent>(sql, new { id })).FirstOrDefault();
         }
     }
 }

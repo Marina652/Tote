@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tote.Application.Event.Common
 {
-    public class Event
+    public class FoundEvent
     {
         public Guid Id { get; set; }
 
@@ -18,7 +18,6 @@ namespace Tote.Application.Event.Common
 
         public DateTime EndDate { get; set; }
 
-        public Guid SportTypeId { get; set; }
-
+        public string SportTypeName { get; set; }
     }
 }
