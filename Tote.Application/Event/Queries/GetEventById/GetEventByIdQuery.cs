@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Tote.Application.Event.Common;
+using Tote.Application.Event.Common.Models;
 
 namespace Tote.Application.Event.Queries.GetEventById
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tote.Application.Event.Commands.UpdateEvent
+namespace Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock
 {
-    public record UpdateEventCommand(Common.Event NewEvent) : IRequest;
+    public record DeleteOutcomeBlockCommand(Guid Id) : IRequest;
 }

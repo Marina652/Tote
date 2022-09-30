@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tote.Application.SportType.Interfaces;
+using Tote.Application.SportType.Common.Interfaces;
 
 namespace Tote.Application.SportType.Queries.GetSportTypeById
 {
-    internal class GetSportTypeByIdHandler : IRequestHandler<GetSportTypeByIdQuery, Common.SportType>
+    internal class GetSportTypeByIdHandler : IRequestHandler<GetSportTypeByIdQuery, Common.Models.SportType>
     {
         private readonly ISportTypeReader _sportTypeReader;
 
@@ -17,10 +17,9 @@ namespace Tote.Application.SportType.Queries.GetSportTypeById
             _sportTypeReader = sportTypeReader;
         }
 
-        public async Task<Common.SportType> Handle(GetSportTypeByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Common.Models.SportType> Handle(GetSportTypeByIdQuery request, CancellationToken cancellationToken)
         {
-            var foundSportType = await _sportTypeReader.ReadByIdAsync(request.Id, cancellationToken);
-            return foundSportType;
+            return await _sportTypeReader.ReadByIdAsync(request.Id, cancellationToken);
         }
     }
 }

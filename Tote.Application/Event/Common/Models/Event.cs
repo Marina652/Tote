@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tote.Application.Event.Common
+namespace Tote.Application.Event.Common.Models
 {
     public class Event
     {

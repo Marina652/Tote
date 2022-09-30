@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tote.Application.SportType.Interfaces;
+using Tote.Application.SportType.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.SportType
 {
@@ -18,9 +18,9 @@ namespace Tote.Infrastructure.Repositories.SportType
             _dbConnection = dbConnection;
         }
 
-        public async ValueTask<Application.SportType.Common.SportType> ReadByIdAsync(Guid id, CancellationToken token)
+        public async ValueTask<Application.SportType.Common.Models.SportType> ReadByIdAsync(Guid id, CancellationToken token)
         {
-            return (await _dbConnection.QueryAsync<Application.SportType.Common.SportType>("SELECT * FROM SportType WHERE Id = @id", new { id })).FirstOrDefault();
+            return (await _dbConnection.QueryAsync<Application.SportType.Common.Models.SportType>("SELECT * FROM SportType WHERE Id = @id", new { id })).FirstOrDefault();
         }
     }
 }

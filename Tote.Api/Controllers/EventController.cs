@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Event.Commands.CreateEvent;
 using Tote.Application.Event.Commands.DeleteEvent;
 using Tote.Application.Event.Commands.UpdateEvent;
-using Tote.Application.Event.Common;
+using Tote.Application.Event.Common.Models;
 using Tote.Application.Event.Queries.GetEventById;
 
 namespace Tote.Api.Controllers

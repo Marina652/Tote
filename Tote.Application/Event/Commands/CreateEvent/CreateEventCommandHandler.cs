@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Tote.Application.Event.Interfaces;
+using Tote.Application.Event.Common.Interfaces;
 
 namespace Tote.Application.Event.Commands.CreateEvent
 {

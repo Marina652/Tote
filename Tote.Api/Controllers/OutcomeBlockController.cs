@@ -1,20 +1,20 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Tote.Application.SportType.Commands.CreateSportType;
-using Tote.Application.SportType.Commands.DeleteSportType;
-using Tote.Application.SportType.Commands.UpdatesportType;
-using Tote.Application.SportType.Common.Models;
-using Tote.Application.SportType.Queries.GetSportTypeById;
+using Tote.Application.OutcomeBlock.Commands.CreateOutcomeBlock;
+using Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock;
+using Tote.Application.OutcomeBlock.Commands.UpdateOutcomeBlock;
+using Tote.Application.OutcomeBlock.Common.Models;
+using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
 
 namespace Tote.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SportTypeController : ControllerBase
+    public class OutcomeBlockController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public SportTypeController(IMediator mediator)
+        public OutcomeBlockController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -23,30 +23,30 @@ namespace Tote.Api.Controllers
         public async Task<IActionResult> Get(Guid id,
           CancellationToken token)
         {
-            var foundEvent = await _mediator.Send(
-                new GetSportTypeByIdQuery(id),
+            var foundOutcomeBlock = await _mediator.Send(
+                new GetOutcomeBlockByIdQuery(id),
                 token);
 
-            return Ok(foundEvent);
+            return Ok(foundOutcomeBlock);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SportType sportType,
+        public async Task<IActionResult> Create(OutcomeBlock outcomeBlock,
            CancellationToken token)
         {
             var createdGuid = await _mediator.Send(
-                new CreateSportTypeCommand(sportType),
+                new CreateOutcomeBlockCommand(outcomeBlock),
                 token);
 
             return Ok(createdGuid);
         }
 
         [HttpPatch]
-        public async Task<IActionResult> Update(SportType newSportType,
+        public async Task<IActionResult> Update(OutcomeBlock newOutcomeBlock,
          CancellationToken token)
         {
             await _mediator.Send(
-                new UpdateSportTypeCommand(newSportType),
+                new UpdateOutcomeBlockCommand(newOutcomeBlock),
                 token);
 
             return Ok();
@@ -58,7 +58,7 @@ namespace Tote.Api.Controllers
             CancellationToken token)
         {
             await _mediator.Send(
-                new DeleteSportTypeCommand(id),
+                new DeleteOutcomeBlockCommand(id),
                 token);
 
             return Ok();

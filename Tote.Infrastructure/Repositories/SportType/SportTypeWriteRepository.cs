@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 using System.Data.SqlClient;
-using Tote.Application.SportType.Interfaces;
+using Tote.Application.SportType.Common.Interfaces;
 
 
 namespace Tote.Infrastructure.Repositories.SportType
@@ -14,7 +14,7 @@ namespace Tote.Infrastructure.Repositories.SportType
             _dbConnection = dbConnection;
         }
 
-        public async ValueTask<Guid> WriteAsync(Application.SportType.Common.SportType newEvent, CancellationToken token)
+        public async ValueTask<Guid> WriteAsync(Application.SportType.Common.Models.SportType newEvent, CancellationToken token)
         {
             return await _dbConnection.QuerySingleAsync<Guid>(
                "INSERT INTO SportType (Name) " +
@@ -23,7 +23,7 @@ namespace Tote.Infrastructure.Repositories.SportType
                new { newEvent.Name });
         }
 
-        public async ValueTask UpdateAsync(Application.SportType.Common.SportType newSportType, CancellationToken token)
+        public async ValueTask UpdateAsync(Application.SportType.Common.Models.SportType newSportType, CancellationToken token)
         {
             await _dbConnection.ExecuteAsync("UPDATE SportType SET Name = @Name WHERE Id = @id",
                     new { newSportType.Name,newSportType.Id });

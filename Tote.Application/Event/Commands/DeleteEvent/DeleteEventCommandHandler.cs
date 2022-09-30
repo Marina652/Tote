@@ -1,10 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tote.Application.Event.Interfaces;
+using Tote.Application.Event.Common.Interfaces;
 
 namespace Tote.Application.Event.Commands.DeleteEvent
 {

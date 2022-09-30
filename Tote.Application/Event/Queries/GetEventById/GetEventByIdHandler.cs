@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Tote.Application.Event.Common;
-using Tote.Application.Event.Interfaces;
+using Tote.Application.Event.Common.Interfaces;
+using Tote.Application.Event.Common.Models;
 
 namespace Tote.Application.Event.Queries.GetEventById
 {

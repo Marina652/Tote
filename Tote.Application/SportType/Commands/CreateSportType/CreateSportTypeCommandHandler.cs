@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tote.Application.SportType.Interfaces;
+using Tote.Application.SportType.Common.Interfaces;
 
 namespace Tote.Application.SportType.Commands.CreateSportType
 {
@@ -12,9 +12,9 @@ namespace Tote.Application.SportType.Commands.CreateSportType
     {
         private readonly ISportTypeWriter _sportTypeWriter;
 
-        public CreateSportTypeCommandHandler(ISportTypeWriter sportType)
+        public CreateSportTypeCommandHandler(ISportTypeWriter sportTypeWriter)
         {
-            _sportTypeWriter = sportType;
+            _sportTypeWriter = sportTypeWriter;
         }
 
         public async Task<Guid> Handle(CreateSportTypeCommand request, CancellationToken cancellationToken)

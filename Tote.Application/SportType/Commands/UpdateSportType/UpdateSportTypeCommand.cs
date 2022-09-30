@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Tote.Application.SportType.Commands.UpdatesportType
 {
-    public record UpdateSportTypeCommand(Common.SportType NewSportType) : IRequest;
+    public record UpdateSportTypeCommand(Common.Models.SportType NewSportType) : IRequest;
 }

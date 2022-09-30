@@ -4,12 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tote.Application.Event.Interfaces;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
-using Tote.Application.Event.Common;
+using Tote.Application.Event.Common.Models;
+using Tote.Application.Event.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.Event
 {

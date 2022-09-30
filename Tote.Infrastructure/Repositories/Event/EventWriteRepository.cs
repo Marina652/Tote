@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using System.Data;
-using System.Data.SqlClient;
-using Tote.Application.Event.Interfaces;
+using Tote.Application.Event.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.Event
 {
@@ -13,7 +12,7 @@ namespace Tote.Infrastructure.Repositories.Event
             _dbConnection = dbConnection;
         }
 
-        public async ValueTask<Guid> WriteAsync(Application.Event.Common.Event newEvent, CancellationToken token)
+        public async ValueTask<Guid> WriteAsync(Application.Event.Common.Models.Event newEvent, CancellationToken token)
         {
              return await _dbConnection.QuerySingleAsync<Guid>(
                 "INSERT INTO Event (Name, Description, StartDate, EndDate, SportTypeId) " +
@@ -27,7 +26,7 @@ namespace Tote.Infrastructure.Repositories.Event
             await _dbConnection.ExecuteAsync("DELETE Event WHERE Id = @id", new { id });
         }
 
-        public async ValueTask UpdateAsync(Application.Event.Common.Event newEvent, CancellationToken token)
+        public async ValueTask UpdateAsync(Application.Event.Common.Models.Event newEvent, CancellationToken token)
         {
             await _dbConnection.ExecuteAsync("UPDATE Event SET Name = @Name, Description = @Description, " +
                 "StartDate = @StartDate, EndDate = @EndDate, SportTypeId = @SportTypeId WHERE Id = @id",
