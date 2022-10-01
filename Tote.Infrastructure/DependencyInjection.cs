@@ -3,9 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.SqlClient;
 using Tote.Application.Event.Common.Interfaces;
+using Tote.Application.Market.Common.Interfaces;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
 using Tote.Application.SportType.Common.Interfaces;
 using Tote.Infrastructure.Repositories.Event;
+using Tote.Infrastructure.Repositories.Market;
 using Tote.Infrastructure.Repositories.OutcomeBlock;
 using Tote.Infrastructure.Repositories.SportType;
 
@@ -26,13 +28,16 @@ namespace Tote.Infrastructure
             services.AddTransient<IOutcomeBlockReader, OutcomeBlockReadRepository>();
             services.AddTransient<IOutcomeBlockWriter, OutcomeBlockWriteRepository>();
 
+            services.AddTransient<IMarketReader, MarketReadRepository>();
+            services.AddTransient<IMarketWriter, MarketWriteRepository>();
+
             return services;
         }
 
         static IServiceCollection AddDbConnectionFactory(this IServiceCollection services, IConfiguration configuration)
         {
             string dbConnectionString = configuration.GetConnectionString("ToteDb");
-            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
+            services.AddTransient<IDbConnection>((sp) => ConnectionFactory.CreateDbConnection(dbConnectionString));
             return services;
         }
     }

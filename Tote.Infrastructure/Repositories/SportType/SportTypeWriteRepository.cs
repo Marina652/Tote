@@ -14,24 +14,33 @@ namespace Tote.Infrastructure.Repositories.SportType
             _dbConnection = dbConnection;
         }
 
-        public async ValueTask<Guid> WriteAsync(Application.SportType.Common.Models.SportType newEvent, CancellationToken token)
+        public async ValueTask<Guid> WriteAsync(Application.SportType.Common.Models.SportType newSportType, CancellationToken token)
         {
-            return await _dbConnection.QuerySingleAsync<Guid>(
+            using (_dbConnection)
+            {
+                return await _dbConnection.QuerySingleAsync<Guid>(
                "INSERT INTO SportType (Name) " +
                "OUTPUT INSERTED.[Id]" +
                "VALUES (@Name)",
-               new { newEvent.Name });
+               new { newSportType.Name });
+            }
         }
 
         public async ValueTask UpdateAsync(Application.SportType.Common.Models.SportType newSportType, CancellationToken token)
         {
-            await _dbConnection.ExecuteAsync("UPDATE SportType SET Name = @Name WHERE Id = @id",
-                    new { newSportType.Name,newSportType.Id });
+            using (_dbConnection)
+            {
+                await _dbConnection.ExecuteAsync("UPDATE SportType SET Name = @Name WHERE Id = @id",
+                    new { newSportType.Name, newSportType.Id });
+            }
         }
 
         public async ValueTask RemoveByIdAsync(Guid id, CancellationToken token)
         {
-            await _dbConnection.ExecuteAsync("DELETE SportType WHERE Id = @id", new { id });
+            using (_dbConnection)
+            {
+                await _dbConnection.ExecuteAsync("DELETE SportType WHERE Id = @id", new { id });
+            }
         }
     }
 }

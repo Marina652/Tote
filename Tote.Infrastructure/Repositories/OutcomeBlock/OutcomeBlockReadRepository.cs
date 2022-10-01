@@ -19,7 +19,10 @@ namespace Tote.Infrastructure.Repositories.OutcomeBlock
 
         public async ValueTask<Application.OutcomeBlock.Common.Models.OutcomeBlock> ReadByIdAsync(Guid id, CancellationToken token)
         {
-            return (await _dbConnection.QueryAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id })).FirstOrDefault();
+            using (_dbConnection)
+            {
+                return (await _dbConnection.QueryAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id })).FirstOrDefault();
+            }
         }
     }
 }
