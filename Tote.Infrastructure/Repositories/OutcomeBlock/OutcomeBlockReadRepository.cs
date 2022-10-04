@@ -16,7 +16,7 @@ internal sealed class OutcomeBlockReadRepository : IOutcomeBlockReader
     {
         using (_dbConnection)
         {
-            return await _dbConnection.QuerySingleAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id });
+            return await _dbConnection.QuerySingleOrDefaultAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id });
         }
     }
 }

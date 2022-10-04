@@ -1,0 +1,10 @@
+﻿namespace Tote.Contracts.OutcomeBlock.Market.Requests;
+
+public class UpdateMarketRequest
+{
+    public Guid Id { get; set; }
+
+    public string Name { get; set; }
+
+    public Guid BlockId { get; set; }
+}

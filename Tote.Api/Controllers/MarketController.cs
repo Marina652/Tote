@@ -1,10 +1,13 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Market.Commands.CreateMarket;
 using Tote.Application.Market.Commands.DeleteMarket;
 using Tote.Application.Market.Commands.UpdateMarket;
 using Tote.Application.Market.Common.Models;
 using Tote.Application.Market.Queries.GetMarketById;
+using Tote.Contracts.OutcomeBlock.Market.Requests;
+using Tote.Contracts.OutcomeBlock.Market.Responses;
 
 namespace Tote.Api.Controllers;
 
@@ -27,26 +30,33 @@ public class MarketController : ControllerBase
             new GetMarketByIdQuery(id),
             token);
 
-        return Ok(foundMarket);
+        var response = foundMarket.Adapt<GetMarketByIdResponse>();
+
+        return Ok(response);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(Market market,
+    public async Task<IActionResult> Create(CreateMarketRequest request,
        CancellationToken token)
     {
         var createdGuid = await _mediator.Send(
-            new CreateMarketCommand(market),
+            new CreateMarketCommand(request.Adapt<Market>()),
             token);
 
-        return Ok(createdGuid);
+        var response = new CreateMarketResponse
+        {
+            Id = createdGuid
+        };
+
+        return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(Market newMarket,
+    public async Task<IActionResult> Update(UpdateMarketRequest request,
      CancellationToken token)
     {
         await _mediator.Send(
-            new UpdateMarketCommand(newMarket),
+            new UpdateMarketCommand(request.Adapt<Market>()),
             token);
 
         return Ok();

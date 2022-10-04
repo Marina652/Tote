@@ -1,10 +1,13 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.OutcomeBlock.Commands.CreateOutcomeBlock;
 using Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock;
 using Tote.Application.OutcomeBlock.Commands.UpdateOutcomeBlock;
 using Tote.Application.OutcomeBlock.Common.Models;
 using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
+using Tote.Contracts.OutcomeBlock.OutcomeBlock.Requests;
+using Tote.Contracts.OutcomeBlock.OutcomeBlock.Responses;
 
 namespace Tote.Api.Controllers;
 
@@ -27,26 +30,33 @@ public class OutcomeBlockController : ControllerBase
             new GetOutcomeBlockByIdQuery(id),
             token);
 
-        return Ok(foundOutcomeBlock);
+        var response = foundOutcomeBlock.Adapt<GetOutcomeBlockByIdResponse>();
+
+        return Ok(response);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(OutcomeBlock outcomeBlock,
+    public async Task<IActionResult> Create(CreateOutcomeBlockRequest request,
        CancellationToken token)
     {
         var createdGuid = await _mediator.Send(
-            new CreateOutcomeBlockCommand(outcomeBlock),
+            new CreateOutcomeBlockCommand(request.Adapt<OutcomeBlock>()),
             token);
 
-        return Ok(createdGuid);
+        var response = new CreateOutcomeBlockResponse
+        {
+            Id = createdGuid
+        };
+
+        return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(OutcomeBlock newOutcomeBlock,
+    public async Task<IActionResult> Update(UpdateOutcomeBlockRequest request,
      CancellationToken token)
     {
         await _mediator.Send(
-            new UpdateOutcomeBlockCommand(newOutcomeBlock),
+            new UpdateOutcomeBlockCommand(request.Adapt<OutcomeBlock>()),
             token);
 
         return Ok();

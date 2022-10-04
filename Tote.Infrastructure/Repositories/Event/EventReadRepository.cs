@@ -23,7 +23,7 @@ internal sealed class EventReadRepository : IEventReader
             "JOIN dbo.SportType ON SportType.Id = Event.SportTypeId " +
             "WHERE Event.Id = @id";
 
-            return await _dbConnection.QuerySingleAsync<FoundEvent>(sql, new { id });
+            return await _dbConnection.QuerySingleOrDefaultAsync<FoundEvent>(sql, new { id });
         }
     }
 }

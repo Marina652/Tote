@@ -16,7 +16,7 @@ internal sealed class MarketReadRepository : IMarketReader
     {
         using (_dbConnection)
         {
-            return await _dbConnection.QuerySingleAsync<Application.Market.Common.Models.Market>("SELECT * FROM Market WHERE Id = @id", new { id });
+            return await _dbConnection.QuerySingleOrDefaultAsync<Application.Market.Common.Models.Market>("SELECT * FROM Market WHERE Id = @id", new { id });
 
         }
     }
