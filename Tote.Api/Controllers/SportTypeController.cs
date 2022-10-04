@@ -1,10 +1,13 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.SportType.Commands.CreateSportType;
 using Tote.Application.SportType.Commands.DeleteSportType;
 using Tote.Application.SportType.Commands.UpdateSportType;
 using Tote.Application.SportType.Common.Models;
 using Tote.Application.SportType.Queries.GetSportTypeById;
+using Tote.Contracts.Event.SportType.Requests;
+using Tote.Contracts.Event.SportType.Responses;
 
 namespace Tote.Api.Controllers;
 
@@ -23,30 +26,37 @@ public class SportTypeController : ControllerBase
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
-        var foundEvent = await _mediator.Send(
+        var foundSportType = await _mediator.Send(
             new GetSportTypeByIdQuery(id),
             token);
 
-        return Ok(foundEvent);
+        var response = foundSportType.Adapt<GetSportTypeByIdResponse>();
+
+        return Ok(response);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(SportType sportType,
+    public async Task<IActionResult> Create(CreateSportTypeRequest request,
        CancellationToken token)
     {
         var createdGuid = await _mediator.Send(
-            new CreateSportTypeCommand(sportType),
+            new CreateSportTypeCommand(request.Adapt<SportType>()),
             token);
 
-        return Ok(createdGuid);
+        var response = new CreateSportTypeResponse
+        {
+            Id = createdGuid
+        };
+
+        return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(SportType newSportType,
+    public async Task<IActionResult> Update(UpdateSportTypeRequest request,
      CancellationToken token)
     {
         await _mediator.Send(
-            new UpdateSportTypeCommand(newSportType),
+            new UpdateSportTypeCommand(request.Adapt<SportType>()),
             token);
 
         return Ok();
