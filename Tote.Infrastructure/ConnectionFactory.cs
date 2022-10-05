@@ -1,26 +1,25 @@
-﻿using System.Data.Common;
+﻿using Microsoft.Extensions.Options;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Tote.Infrastructure;
 
-internal class ConnectionFactory
+internal class ConnectionFactory : IConnectionFactory
 {
-    public static DbConnection CreateDbConnection(string connectionString)
+    private readonly IOptions<CustomConnectionStrings> _options;
+
+    public ConnectionFactory(IOptions<CustomConnectionStrings> options)
     {
-        DbConnection connection;
+        _options = options;
+    }
 
-        if (connectionString == null) return null;
+    public IDbConnection CreateConnection()
+    {
+        var connectionString = _options.Value.ToteDbConnecion;
 
-        try
-        {
-            connection = new SqlConnection(connectionString);
-        }
+        if (connectionString is null) 
+            return null;
 
-        catch (Exception ex)
-        {
-            connection = null;
-        }
-
-        return connection;
+        return new SqlConnection(connectionString);
     }
 }

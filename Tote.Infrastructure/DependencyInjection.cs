@@ -35,8 +35,10 @@ public static class DependencyInjections
 
     static IServiceCollection AddDbConnectionFactory(this IServiceCollection services, IConfiguration configuration)
     {
-        string dbConnectionString = configuration.GetConnectionString("ToteDb");
-        services.AddTransient<IDbConnection>((sp) => ConnectionFactory.CreateDbConnection(dbConnectionString));
+        services.Configure<CustomConnectionStrings>(options => configuration.GetSection(nameof(CustomConnectionStrings)).Bind(options));
+
+        services.AddTransient<IConnectionFactory, ConnectionFactory>();
+
         return services;
     }
 }

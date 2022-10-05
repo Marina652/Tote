@@ -1,22 +1,21 @@
 ﻿using Dapper;
-using System.Data;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.OutcomeBlock;
 
 internal sealed class OutcomeBlockReadRepository : IOutcomeBlockReader
 {
-    private readonly IDbConnection _dbConnection;
-    public OutcomeBlockReadRepository(IDbConnection dbConnection)
+    private readonly IConnectionFactory _connectionFactory;
+
+    public OutcomeBlockReadRepository(IConnectionFactory connectionFactory)
     {
-        _dbConnection = dbConnection;
+        _connectionFactory = connectionFactory;
     }
 
     public async Task<Application.OutcomeBlock.Common.Models.OutcomeBlock> ReadByIdAsync(Guid id, CancellationToken token)
     {
-        using (_dbConnection)
-        {
-            return await _dbConnection.QuerySingleOrDefaultAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id });
-        }
+        using var dbConnection = _connectionFactory.CreateConnection();
+
+        return await dbConnection.QuerySingleOrDefaultAsync<Application.OutcomeBlock.Common.Models.OutcomeBlock>("SELECT * FROM OutcomeBlock WHERE Id = @id", new { id });
     }
 }

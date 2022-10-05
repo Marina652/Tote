@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Dapper;
+﻿using Dapper;
 using Tote.Application.Event.Common.Models;
 using Tote.Application.Event.Common.Interfaces;
 
@@ -7,23 +6,22 @@ namespace Tote.Infrastructure.Repositories.Event;
 
 internal sealed class EventReadRepository : IEventReader
 {
-    private readonly IDbConnection _dbConnection;
-    public EventReadRepository(IDbConnection dbConnection)
+    private readonly IConnectionFactory _connectionFactory;
+    public EventReadRepository(IConnectionFactory connectionFactory)
     {
-        _dbConnection = dbConnection;
+        _connectionFactory = connectionFactory;
     }
 
     public async Task<FoundEvent> ReadByIdAsync(Guid id, CancellationToken token)
     {
-        using (_dbConnection)
-        {
-            var sql =
-            "SELECT Event.Id, Event.Name, Description, StartDate, EndDate, SportType.Name AS SportTypeName " +
-            "FROM Event " +
-            "JOIN dbo.SportType ON SportType.Id = Event.SportTypeId " +
-            "WHERE Event.Id = @id";
+        using var dbConnection = _connectionFactory.CreateConnection();
 
-            return await _dbConnection.QuerySingleOrDefaultAsync<FoundEvent>(sql, new { id });
-        }
+        var sql =
+        "SELECT Event.Id, Event.Name, Description, StartDate, EndDate, SportType.Name AS SportTypeName " +
+        "FROM Event " +
+        "JOIN dbo.SportType ON SportType.Id = Event.SportTypeId " +
+        "WHERE Event.Id = @id";
+
+        return await dbConnection.QuerySingleOrDefaultAsync<FoundEvent>(sql, new { id });
     }
 }
