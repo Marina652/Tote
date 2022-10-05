@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data;
 using Tote.Application.Event.Common.Interfaces;
 using Tote.Application.Market.Common.Interfaces;
 using Tote.Application.OutcomeBlock.Common.Interfaces;

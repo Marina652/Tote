@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System.Data;
 using Tote.Application.Event.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.Event;

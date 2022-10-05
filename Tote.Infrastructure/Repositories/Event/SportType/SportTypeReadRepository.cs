@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System.Data;
 using Tote.Application.SportType.Common.Interfaces;
 
 namespace Tote.Infrastructure.Repositories.Event.SportType;
