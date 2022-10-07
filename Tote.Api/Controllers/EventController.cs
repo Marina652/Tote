@@ -8,6 +8,7 @@ using Tote.Application.Event.Queries.GetEventById;
 using Mapster;
 using Tote.Contracts.Event.Responses;
 using Tote.Contracts.Event.Requests;
+using Tote.Contracts;
 
 namespace Tote.Api.Controllers;
 
@@ -48,8 +49,7 @@ public class EventController : ControllerBase
             Id = createdId
         };
 
-        return Ok(response);
-        //return Created(new Uri($"{Request.Path}"), response);
+        return Created(ApiRoutes.EventRoutes.CreateEvent, response);
     }
 
     [HttpPatch("{id}")]

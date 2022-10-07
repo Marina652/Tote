@@ -6,6 +6,7 @@ using Tote.Application.SportType.Commands.DeleteSportType;
 using Tote.Application.SportType.Commands.UpdateSportType;
 using Tote.Application.SportType.Common.Models;
 using Tote.Application.SportType.Queries.GetSportTypeById;
+using Tote.Contracts;
 using Tote.Contracts.Event.SportType.Requests;
 using Tote.Contracts.Event.SportType.Responses;
 
@@ -48,7 +49,7 @@ public class SportTypeController : ControllerBase
             Id = createdId
         };
 
-        return Ok(response);
+        return Created(ApiRoutes.SportType.CreatesportType, response);
     }
 
     [HttpPatch]

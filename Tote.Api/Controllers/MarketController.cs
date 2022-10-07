@@ -6,6 +6,7 @@ using Tote.Application.Market.Commands.DeleteMarket;
 using Tote.Application.Market.Commands.UpdateMarket;
 using Tote.Application.Market.Common.Models;
 using Tote.Application.Market.Queries.GetMarketById;
+using Tote.Contracts;
 using Tote.Contracts.OutcomeBlock.Market.Requests;
 using Tote.Contracts.OutcomeBlock.Market.Responses;
 
@@ -48,7 +49,7 @@ public class MarketController : ControllerBase
             Id = createdId
         };
 
-        return Ok(response);
+        return Created(ApiRoutes.Market.CreateMarket, response);
     }
 
     [HttpPatch]

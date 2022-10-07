@@ -6,6 +6,7 @@ using Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock;
 using Tote.Application.OutcomeBlock.Commands.UpdateOutcomeBlock;
 using Tote.Application.OutcomeBlock.Common.Models;
 using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
+using Tote.Contracts;
 using Tote.Contracts.OutcomeBlock.Requests;
 using Tote.Contracts.OutcomeBlock.Responses;
 
@@ -48,7 +49,7 @@ public class OutcomeBlockController : ControllerBase
             Id = createdId
         };
 
-        return Ok(response);
+        return Created(ApiRoutes.OutcomeBlock.CreateOutcomeBlock, response);
     }
 
     [HttpPatch]
