@@ -1,10 +1,7 @@
-﻿namespace Tote.Contracts.Event.Event.Responses;
+﻿namespace Tote.Contracts.Event.Requests;
 
-public class GetEventByIdResponse
+public class UpdateEventRequest
 {
-
-    public Guid Id { get; set; }
-
     public string Name { get; set; }
 
     public string Description { get; set; }
@@ -13,5 +10,5 @@ public class GetEventByIdResponse
 
     public DateTime EndDate { get; set; }
 
-    public string SportTypeName { get; set; }
-};
+    public Guid SportTypeId { get; set; }
+}

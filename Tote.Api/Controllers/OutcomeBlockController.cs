@@ -6,8 +6,8 @@ using Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock;
 using Tote.Application.OutcomeBlock.Commands.UpdateOutcomeBlock;
 using Tote.Application.OutcomeBlock.Common.Models;
 using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
-using Tote.Contracts.OutcomeBlock.OutcomeBlock.Requests;
-using Tote.Contracts.OutcomeBlock.OutcomeBlock.Responses;
+using Tote.Contracts.OutcomeBlock.Requests;
+using Tote.Contracts.OutcomeBlock.Responses;
 
 namespace Tote.Api.Controllers;
 
@@ -39,24 +39,27 @@ public class OutcomeBlockController : ControllerBase
     public async Task<IActionResult> Create(CreateOutcomeBlockRequest request,
        CancellationToken token)
     {
-        var createdGuid = await _mediator.Send(
+        var createdId = await _mediator.Send(
             new CreateOutcomeBlockCommand(request.Adapt<OutcomeBlock>()),
             token);
 
         var response = new CreateOutcomeBlockResponse
         {
-            Id = createdGuid
+            Id = createdId
         };
 
         return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(UpdateOutcomeBlockRequest request,
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeBlockRequest request,
      CancellationToken token)
     {
+        var newOutcomeBlock = request.Adapt<OutcomeBlock>();
+        newOutcomeBlock.Id = id;
+
         await _mediator.Send(
-            new UpdateOutcomeBlockCommand(request.Adapt<OutcomeBlock>()),
+            new UpdateOutcomeBlockCommand(newOutcomeBlock),
             token);
 
         return Ok();

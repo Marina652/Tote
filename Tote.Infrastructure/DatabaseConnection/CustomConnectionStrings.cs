@@ -1,4 +1,4 @@
-﻿namespace Tote.Infrastructure;
+﻿namespace Tote.Infrastructure.DatabaseConnection;
 
 internal class CustomConnectionStrings
 {

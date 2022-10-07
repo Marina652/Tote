@@ -6,8 +6,8 @@ using Tote.Application.Event.Commands.UpdateEvent;
 using Tote.Application.Event.Common.Models;
 using Tote.Application.Event.Queries.GetEventById;
 using Mapster;
-using Tote.Contracts.Event.Event.Responses;
-using Tote.Contracts.Event.Event.Requests;
+using Tote.Contracts.Event.Responses;
+using Tote.Contracts.Event.Requests;
 
 namespace Tote.Api.Controllers;
 
@@ -39,24 +39,28 @@ public class EventController : ControllerBase
     public async Task<IActionResult> Create(CreateEventRequest request,
         CancellationToken token)
     {
-        var createdGuid = await _mediator.Send(
+        var createdId = await _mediator.Send(
             new CreateEventCommand(request.Adapt<Event>()),
             token);
 
         var response = new CreateEventResponse
         {
-            Id = createdGuid
+            Id = createdId
         };
 
         return Ok(response);
+        //return Created(new Uri($"{Request.Path}"), response);
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> Update(UpdateEventRequest request,
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
         CancellationToken token)
     {
+        var newEvent = request.Adapt<Event>();
+        newEvent.Id = id;
+
         await _mediator.Send(
-            new UpdateEventCommand(request.Adapt<Event>()),
+            new UpdateEventCommand(newEvent),
             token);
 
         return Ok();

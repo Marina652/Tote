@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Tote.Application.Market.Common.Interfaces;
+using AppMarket = Tote.Application.Market.Common.Models.Market;
 
 namespace Tote.Application.Market.Queries.GetMarketById;
 
-internal class GetMarketByIdHandler : IRequestHandler<GetMarketByIdQuery, Common.Models.Market>
+internal class GetMarketByIdHandler : IRequestHandler<GetMarketByIdQuery, AppMarket>
 {
     private readonly IMarketReader _marketReader;
 

@@ -1,6 +1,7 @@
 ﻿namespace Tote.Application.OutcomeBlock.Common.Interfaces;
+using AppOutcomeBlock = Models.OutcomeBlock;
 
 public interface IOutcomeBlockReader
 {
-    Task<Models.OutcomeBlock> ReadByIdAsync(Guid id, CancellationToken token = default);
+    Task<AppOutcomeBlock> ReadByIdAsync(Guid id, CancellationToken token = default);
 }

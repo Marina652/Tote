@@ -1,7 +1,10 @@
-﻿namespace Tote.Contracts.Event.Event.Requests;
+﻿namespace Tote.Contracts.Event.Responses;
 
-public class CreateEventRequest
+public class GetEventByIdResponse
 {
+
+    public Guid Id { get; set; }
+
     public string Name { get; set; }
 
     public string Description { get; set; }
@@ -10,5 +13,5 @@ public class CreateEventRequest
 
     public DateTime EndDate { get; set; }
 
-    public Guid SportTypeId { get; set; }
-}
+    public string SportTypeName { get; set; }
+};

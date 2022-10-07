@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Tote.Application.Event.Common.Interfaces;
 using Tote.Application.Market.Common.Interfaces;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
 using Tote.Application.SportType.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
 using Tote.Infrastructure.Repositories.Event;
 using Tote.Infrastructure.Repositories.Event.SportType;
 using Tote.Infrastructure.Repositories.OutcomeBlock;
@@ -34,7 +36,9 @@ public static class DependencyInjections
 
     static IServiceCollection AddDbConnectionFactory(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<CustomConnectionStrings>(options => configuration.GetSection(nameof(CustomConnectionStrings)).Bind(options));
+        var setting = new CustomConnectionStrings();
+        configuration.Bind(nameof(CustomConnectionStrings), setting);
+        services.AddSingleton(Options.Create(setting));
 
         services.AddTransient<IConnectionFactory, ConnectionFactory>();
 

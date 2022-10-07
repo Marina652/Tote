@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Tote.Application.Event.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
+using AppEvent = Tote.Application.Event.Common.Models.Event;
 
 namespace Tote.Infrastructure.Repositories.Event;
 
@@ -12,7 +14,7 @@ internal sealed class EventWriteRepository : IEventWriter
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<Guid> WriteAsync(Application.Event.Common.Models.Event newEvent, CancellationToken token)
+    public async Task<Guid> WriteAsync(AppEvent newEvent, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 
@@ -30,7 +32,7 @@ internal sealed class EventWriteRepository : IEventWriter
         await dbConnection.ExecuteAsync("DELETE Event WHERE Id = @id", new { id });
     }
 
-    public async Task UpdateAsync(Application.Event.Common.Models.Event newEvent, CancellationToken token)
+    public async Task UpdateAsync(AppEvent newEvent, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 

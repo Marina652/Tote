@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
+using AppOutcomeBlock = Tote.Application.OutcomeBlock.Common.Models.OutcomeBlock;
 
 namespace Tote.Infrastructure.Repositories.OutcomeBlock;
 
@@ -12,7 +14,7 @@ internal sealed class OutcomeBlockWriteRepository : IOutcomeBlockWriter
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<Guid> WriteAsync(Application.OutcomeBlock.Common.Models.OutcomeBlock newOutcomeBlock, CancellationToken token)
+    public async Task<Guid> WriteAsync(AppOutcomeBlock newOutcomeBlock, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 
@@ -23,7 +25,7 @@ internal sealed class OutcomeBlockWriteRepository : IOutcomeBlockWriter
        new { newOutcomeBlock.Description, newOutcomeBlock.EventId });
     }
 
-    public async Task UpdateAsync(Application.OutcomeBlock.Common.Models.OutcomeBlock newOutcomeBlock, CancellationToken token)
+    public async Task UpdateAsync(AppOutcomeBlock newOutcomeBlock, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 

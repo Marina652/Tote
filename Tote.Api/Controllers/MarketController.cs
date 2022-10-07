@@ -39,24 +39,27 @@ public class MarketController : ControllerBase
     public async Task<IActionResult> Create(CreateMarketRequest request,
        CancellationToken token)
     {
-        var createdGuid = await _mediator.Send(
+        var createdId = await _mediator.Send(
             new CreateMarketCommand(request.Adapt<Market>()),
             token);
 
         var response = new CreateMarketResponse
         {
-            Id = createdGuid
+            Id = createdId
         };
 
         return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(UpdateMarketRequest request,
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMarketRequest request,
      CancellationToken token)
     {
+        var newMarket = request.Adapt<Market>();
+        newMarket.Id = id;
+
         await _mediator.Send(
-            new UpdateMarketCommand(request.Adapt<Market>()),
+            new UpdateMarketCommand(newMarket),
             token);
 
         return Ok();

@@ -19,7 +19,9 @@ internal class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand>
         var foundEvent = await _eventReader.ReadByIdAsync(request.Id, cancellationToken);
 
         if (foundEvent is null)
+        {
             throw new ArgumentException("Object doesn't exist");
+        }
 
         await _eventWriter.RemoveByIdAsync(request.Id, cancellationToken);
         return Unit.Value;

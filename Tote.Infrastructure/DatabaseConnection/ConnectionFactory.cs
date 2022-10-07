@@ -2,22 +2,22 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Tote.Infrastructure;
+namespace Tote.Infrastructure.DatabaseConnection;
 
 internal class ConnectionFactory : IConnectionFactory
 {
-    private readonly IOptions<CustomConnectionStrings> _options;
+    private readonly CustomConnectionStrings _options;
 
     public ConnectionFactory(IOptions<CustomConnectionStrings> options)
     {
-        _options = options;
+        _options = options.Value;
     }
 
     public IDbConnection CreateConnection()
     {
-        var connectionString = _options.Value.ToteDbConnecion;
+        var connectionString = _options.ToteDbConnecion;
 
-        if (connectionString is null) 
+        if (connectionString is null)
             return null;
 
         return new SqlConnection(connectionString);

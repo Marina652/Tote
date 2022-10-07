@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Tote.Application.SportType.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
+using AppSportType = Tote.Application.SportType.Common.Models.SportType;
 
 
 namespace Tote.Infrastructure.Repositories.Event.SportType;
@@ -12,7 +14,7 @@ internal sealed class SportTypeWriteRepository : ISportTypeWriter
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<Guid> WriteAsync(Application.SportType.Common.Models.SportType newSportType, CancellationToken token)
+    public async Task<Guid> WriteAsync(AppSportType newSportType, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
         return await dbConnection.QuerySingleAsync<Guid>(

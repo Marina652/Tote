@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Tote.Application.Market.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
 
 namespace Tote.Infrastructure.Repositories.OutcomeBlock.Market;
 

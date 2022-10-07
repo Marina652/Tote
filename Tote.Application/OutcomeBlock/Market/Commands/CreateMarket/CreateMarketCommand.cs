@@ -1,5 +1,6 @@
 ﻿using MediatR;
+using AppMarket = Tote.Application.Market.Common.Models.Market;
 
 namespace Tote.Application.Market.Commands.CreateMarket;
 
-public record CreateMarketCommand(Common.Models.Market NewMarket) : IRequest<Guid>;
+public record CreateMarketCommand(AppMarket NewMarket) : IRequest<Guid>;

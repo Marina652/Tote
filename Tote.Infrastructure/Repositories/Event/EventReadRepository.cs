@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Tote.Application.Event.Common.Models;
 using Tote.Application.Event.Common.Interfaces;
+using Tote.Infrastructure.DatabaseConnection;
 
 namespace Tote.Infrastructure.Repositories.Event;
 

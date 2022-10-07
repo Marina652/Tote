@@ -1,9 +1,7 @@
-﻿namespace Tote.Contracts.Event.Event.Requests;
+﻿namespace Tote.Contracts.Event.Requests;
 
-public class UpdateEventRequest
+public class CreateEventRequest
 {
-    public Guid Id { get; set; }
-
     public string Name { get; set; }
 
     public string Description { get; set; }

@@ -39,24 +39,27 @@ public class SportTypeController : ControllerBase
     public async Task<IActionResult> Create(CreateSportTypeRequest request,
        CancellationToken token)
     {
-        var createdGuid = await _mediator.Send(
+        var createdId = await _mediator.Send(
             new CreateSportTypeCommand(request.Adapt<SportType>()),
             token);
 
         var response = new CreateSportTypeResponse
         {
-            Id = createdGuid
+            Id = createdId
         };
 
         return Ok(response);
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Update(UpdateSportTypeRequest request,
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateSportTypeRequest request,
      CancellationToken token)
     {
+        var newSportType = request.Adapt<SportType>();
+        newSportType.Id = id;
+
         await _mediator.Send(
-            new UpdateSportTypeCommand(request.Adapt<SportType>()),
+            new UpdateSportTypeCommand(newSportType),
             token);
 
         return Ok();

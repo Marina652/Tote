@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
+using AppOutcomeBlock = Tote.Application.OutcomeBlock.Common.Models.OutcomeBlock;
 
 namespace Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
 
-internal class GetOutcomeBlockByIdHandler : IRequestHandler<GetOutcomeBlockByIdQuery, Common.Models.OutcomeBlock>
+internal class GetOutcomeBlockByIdHandler : IRequestHandler<GetOutcomeBlockByIdQuery, AppOutcomeBlock>
 {
     private readonly IOutcomeBlockReader _outcomeBlockReader;
 

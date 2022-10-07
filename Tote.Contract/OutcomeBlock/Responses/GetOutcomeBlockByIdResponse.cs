@@ -1,6 +1,6 @@
-﻿namespace Tote.Contracts.OutcomeBlock.OutcomeBlock.Requests;
+﻿namespace Tote.Contracts.OutcomeBlock.Responses;
 
-public class UpdateOutcomeBlockRequest
+public class GetOutcomeBlockByIdResponse
 {
     public Guid Id { get; set; }
 

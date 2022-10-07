@@ -1,5 +1,6 @@
 ﻿using MediatR;
+using AppSportType = Tote.Application.SportType.Common.Models.SportType;
 
 namespace Tote.Application.SportType.Commands.UpdateSportType;
 
-public record UpdateSportTypeCommand(Common.Models.SportType NewSportType) : IRequest;
+public record UpdateSportTypeCommand(AppSportType NewSportType) : IRequest;

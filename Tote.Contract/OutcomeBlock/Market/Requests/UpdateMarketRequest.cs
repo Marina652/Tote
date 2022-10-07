@@ -2,8 +2,6 @@
 
 public class UpdateMarketRequest
 {
-    public Guid Id { get; set; }
-
     public string Name { get; set; }
 
     public Guid BlockId { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Tote.Contracts.OutcomeBlock.OutcomeBlock.Requests;
+﻿namespace Tote.Contracts.OutcomeBlock.Requests;
 
 public class CreateOutcomeBlockRequest
 {

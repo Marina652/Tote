@@ -1,4 +1,4 @@
-﻿namespace Tote.Contracts.Event.Event.Responses;
+﻿namespace Tote.Contracts.Event.Responses;
 
 public class CreateEventResponse
 {

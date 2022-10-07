@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Tote.Application.SportType.Common.Interfaces;
+using AppSportType = Tote.Application.SportType.Common.Models.SportType;
 
 namespace Tote.Application.SportType.Queries.GetSportTypeById;
 
-internal class GetSportTypeByIdHandler : IRequestHandler<GetSportTypeByIdQuery, Common.Models.SportType>
+internal class GetSportTypeByIdHandler : IRequestHandler<GetSportTypeByIdQuery, AppSportType>
 {
     private readonly ISportTypeReader _sportTypeReader;
 
