@@ -24,7 +24,7 @@ internal sealed class SportTypeWriteRepository : ISportTypeWriter
        new { newSportType.Name });
     }
 
-    public async Task UpdateAsync(Application.SportType.Common.Models.SportType newSportType, CancellationToken token)
+    public async Task UpdateAsync(AppSportType newSportType, CancellationToken token)
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 

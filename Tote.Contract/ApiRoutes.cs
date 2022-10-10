@@ -37,4 +37,12 @@ public class ApiRoutes
         public const string UpdateMarket = Base + "/market";
         public const string DeleteMarket = Base + "/market/{MarketId}";
     }
+
+    public static class Bet
+    {
+        public const string GetBetById = Base + "/bet/{BetId}";
+        public const string CreateBet = Base + "/bet";
+        public const string UpdateBetStatus = Base + "/bet";
+        public const string DeleteBet = Base + "/bet/{BetId}";
+    }
 }

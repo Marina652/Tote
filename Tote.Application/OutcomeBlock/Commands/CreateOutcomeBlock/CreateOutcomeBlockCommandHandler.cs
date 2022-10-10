@@ -7,9 +7,9 @@ internal class CreateOutcomeBlockCommandHandler : IRequestHandler<CreateOutcomeB
 {
     private readonly IOutcomeBlockWriter _outcomeBlockWriter;
 
-    public CreateOutcomeBlockCommandHandler(IOutcomeBlockWriter soutcomeBlockWriter)
+    public CreateOutcomeBlockCommandHandler(IOutcomeBlockWriter outcomeBlockWriter)
     {
-        _outcomeBlockWriter = soutcomeBlockWriter;
+        _outcomeBlockWriter = outcomeBlockWriter;
     }
 
     public async Task<Guid> Handle(CreateOutcomeBlockCommand request, CancellationToken cancellationToken)

@@ -13,7 +13,7 @@ internal class GetOutcomeBlockByIdHandler : IRequestHandler<GetOutcomeBlockByIdQ
         _outcomeBlockReader = outcomeBlockReader;
     }
 
-    public async Task<Common.Models.OutcomeBlock> Handle(GetOutcomeBlockByIdQuery request, CancellationToken cancellationToken)
+    public async Task<AppOutcomeBlock> Handle(GetOutcomeBlockByIdQuery request, CancellationToken cancellationToken)
     {
         return await _outcomeBlockReader.ReadByIdAsync(request.Id, cancellationToken);
     }

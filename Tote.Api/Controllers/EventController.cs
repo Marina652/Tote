@@ -53,7 +53,7 @@ public class EventController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
+    public async Task<IActionResult> UpdateStatus([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
         CancellationToken token)
     {
         var newEvent = request.Adapt<Event>();

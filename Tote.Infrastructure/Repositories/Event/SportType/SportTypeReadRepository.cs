@@ -17,6 +17,6 @@ internal sealed class SportTypeReadRepository : ISportTypeReader
     {
         using var dbConnection = _connectionFactory.CreateConnection();
 
-        return await dbConnection.QuerySingleOrDefaultAsync<Application.SportType.Common.Models.SportType>("SELECT * FROM SportType WHERE Id = @id", new { id });
+        return await dbConnection.QuerySingleOrDefaultAsync<AppSportType>("SELECT * FROM SportType WHERE Id = @id", new { id });
     }
 }

@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tote.Application\Tote.Application.csproj" />
+  </ItemGroup>
+
 </Project>
