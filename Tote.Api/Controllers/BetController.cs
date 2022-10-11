@@ -23,7 +23,7 @@ public class BetController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {
@@ -49,21 +49,23 @@ public class BetController : ControllerBase
             Id = createdId
         };
 
-        return Created(ApiRoutes.Bet.CreateBet, response);
+        return CreatedAtAction(nameof(BetController.Get),
+           new { response.Id },
+           response);
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateBetRequest request,
+    public async Task<IActionResult> UpdateBetStatus([FromRoute] Guid id, [FromBody] UpdateBetRequest request,
         CancellationToken token)
     {
         await _mediator.Send(
-            new UpdateBetCommand(id, request.Status),
+            new UpdateBetStatusCommand(id, request.Status),
             token);
 
         return Ok();
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

@@ -8,41 +8,51 @@ public class ApiRoutes
 
     public static class EventRoutes
     {
-        public const string GetEventById = Base + "/event/{EventId}";
-        public const string CreateEvent = Base + "/event";
-        public const string UpdateEvent = Base + "/event";
-        public const string DeleteEvent = Base + "/event/{EventId}";
+        public const string GetEventById = Base + "/events/{EventId}";
+        public const string CreateEvent = Base + "/events";
+        public const string UpdateEvent = Base + "/events";
+        public const string DeleteEvent = Base + "/events/{EventId}";
     }
 
-    public static class SportType
+    public static class SportTypes
     {
-        public const string GetSportTypeById = Base + "/sportType/{SportTypeId}";
-        public const string CreatesportType = Base + "/sportType";
-        public const string UpdateSportType = Base + "/sportType";
-        public const string DeleteSportType = Base + "/sportType/{SportTypeId}";
+        public const string GetSportTypeById = Base + "/sportTypes/{SportTypeId}";
+        public const string CreatesportType = Base + "/sportTypes";
+        public const string UpdateSportType = Base + "/sportTypes";
+        public const string DeleteSportType = Base + "/sportTypes/{SportTypeId}";
     }
 
-    public static class OutcomeBlock
+    public static class OutcomeBlocks
     {
-        public const string GetOutcomeBlockById = Base + "/outcomeBlock/{OutcomeBlockId}";
-        public const string CreateOutcomeBlock = Base + "/outcomeBlock";
-        public const string UpdateOutcomeBlock = Base + "/outcomeBlock";
-        public const string DeleteOutcomeBlock = Base + "/outcomeBlock/{OutcomeBlockId}";
+        public const string GetOutcomeBlockById = Base + "/outcomeBlocks/{OutcomeBlockId}";
+        public const string CreateOutcomeBlock = Base + "/outcomeBlocks";
+        public const string UpdateOutcomeBlock = Base + "/outcomeBlocks";
+        public const string DeleteOutcomeBlock = Base + "/outcomeBlocks/{OutcomeBlockId}";
+        public const string GetOutcomeBlockMarkets = Base + "/outcomeBlocks/{OutcomeBlockId}/markets";
     }
 
-    public static class Market
+    public static class Markets
     {
-        public const string GetMarketById = Base + "/market/{MarketId}";
-        public const string CreateMarket = Base + "/market";
-        public const string UpdateMarket = Base + "/market";
-        public const string DeleteMarket = Base + "/market/{MarketId}";
+        public const string GetMarketById = Base + "/markets/{MarketId}";
+        public const string CreateMarket = Base + "/markets";
+        public const string UpdateMarket = Base + "/markets";
+        public const string DeleteMarket = Base + "/markets/{MarketId}";
+        public const string GetMarketOutcomes = Base + "/markets/{MarketId}";
     }
 
-    public static class Bet
+    public static class Outcomes
     {
-        public const string GetBetById = Base + "/bet/{BetId}";
-        public const string CreateBet = Base + "/bet";
-        public const string UpdateBetStatus = Base + "/bet";
-        public const string DeleteBet = Base + "/bet/{BetId}";
+        public const string GetOutcomeById = Base + "/outcomes/{OutcomeId}";
+        public const string CreateOutcome = Base + "/outcomes";
+        public const string UpdateOutcome = Base + "/outcomes";
+        public const string DeleteOutcome = Base + "/outcomes/{OutcomeId}";
+    }
+
+    public static class Bets
+    {
+        public const string GetBetById = Base + "/bets/{BetId}";
+        public const string CreateBet = Base + "/bets";
+        public const string UpdateBetStatus = Base + "/bets";
+        public const string DeleteBet = Base + "/bets/{BetId}";
     }
 }

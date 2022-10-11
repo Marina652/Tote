@@ -23,7 +23,7 @@ public class MarketController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
@@ -49,10 +49,12 @@ public class MarketController : ControllerBase
             Id = createdId
         };
 
-        return Created(ApiRoutes.Market.CreateMarket, response);
+        return CreatedAtAction(nameof(MarketController.Get),
+           new { response.Id },
+           response);
     }
 
-    [HttpPatch]
+    [HttpPatch("{id}")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMarketRequest request,
      CancellationToken token)
     {
@@ -67,7 +69,7 @@ public class MarketController : ControllerBase
     }
 
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

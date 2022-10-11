@@ -23,7 +23,7 @@ public class EventController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {
@@ -49,7 +49,9 @@ public class EventController : ControllerBase
             Id = createdId
         };
 
-        return Created(ApiRoutes.EventRoutes.CreateEvent, response);
+        return CreatedAtAction(nameof(EventController.Get),
+            new { response.Id }, 
+            response);
     }
 
     [HttpPatch("{id}")]
@@ -66,7 +68,7 @@ public class EventController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {
