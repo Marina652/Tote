@@ -1,6 +1,6 @@
-﻿namespace Tote.Application.Outcome.Common.Models;
+﻿namespace Tote.Contracts.Outcome.Responses;
 
-public class Outcome
+public class GetOutcomeByIdResponse
 {
     public Guid Id { get; set; }
 

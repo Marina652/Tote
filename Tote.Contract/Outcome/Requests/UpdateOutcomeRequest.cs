@@ -1,9 +1,7 @@
-﻿namespace Tote.Application.Outcome.Common.Models;
+﻿namespace Tote.Contracts.Outcome.Requests;
 
-public class Outcome
+public class UpdateOutcomeRequest
 {
-    public Guid Id { get; set; }
-
     public string Name { get; set; }
 
     public double CurrentCoefficient { get; set; }

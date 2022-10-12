@@ -4,12 +4,14 @@ using Microsoft.Extensions.Options;
 using Tote.Application.Bet.Common.Interfaces;
 using Tote.Application.Event.Common.Interfaces;
 using Tote.Application.Market.Common.Interfaces;
+using Tote.Application.Outcome.Common.Interfaces;
 using Tote.Application.OutcomeBlock.Common.Interfaces;
 using Tote.Application.SportType.Common.Interfaces;
 using Tote.Infrastructure.DatabaseConnection;
 using Tote.Infrastructure.Repositories.Bet;
 using Tote.Infrastructure.Repositories.Event;
 using Tote.Infrastructure.Repositories.Event.SportType;
+using Tote.Infrastructure.Repositories.Outcome;
 using Tote.Infrastructure.Repositories.OutcomeBlock;
 using Tote.Infrastructure.Repositories.OutcomeBlock.Market;
 
@@ -32,6 +34,9 @@ public static class DependencyInjections
 
         services.AddTransient<IMarketReader, MarketReadRepository>();
         services.AddTransient<IMarketWriter, MarketWriteRepository>();
+
+        services.AddTransient<IOutcomeReader, OutcomeReadRepository>();
+        services.AddTransient<IOutcomeWriter, OutcomeWriteRepository>();
 
         services.AddTransient<IBetReader, BetReadRepository>();
         services.AddTransient<IBetWriter, BetWriteRepository>();

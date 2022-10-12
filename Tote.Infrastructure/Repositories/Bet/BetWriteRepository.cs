@@ -6,7 +6,7 @@ using AppBet = Tote.Application.Bet.Common.Models.Bet;
 
 namespace Tote.Infrastructure.Repositories.Bet;
 
-internal class BetWriteRepository : IBetWriter
+internal sealed class BetWriteRepository : IBetWriter
 {
     private readonly IConnectionFactory _connectionFactory;
 
