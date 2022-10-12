@@ -6,6 +6,7 @@ using Tote.Application.Market.Commands.DeleteMarket;
 using Tote.Application.Market.Commands.UpdateMarket;
 using Tote.Application.Market.Common.Models;
 using Tote.Application.Market.Queries.GetMarketById;
+using Tote.Application.Market.Queries.GetMarketOutcomes;
 using Tote.Contracts;
 using Tote.Contracts.OutcomeBlock.Market.Requests;
 using Tote.Contracts.OutcomeBlock.Market.Responses;
@@ -32,6 +33,17 @@ public class MarketController : ControllerBase
             token);
 
         var response = foundMarket.Adapt<GetMarketByIdResponse>();
+
+        return Ok(response);
+    }
+
+    [HttpGet(ApiRoutes.Markets.GetMarketOutcomes)]
+    public async Task<IActionResult> GetMarketOutcomes(Guid id,
+     CancellationToken token)
+    {
+        var response = await _mediator.Send(
+            new GetMarketOutcomesQuery(id),
+            token);
 
         return Ok(response);
     }

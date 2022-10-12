@@ -23,7 +23,7 @@ public class BetController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet(ApiRoutes.Bets.GetBetById)]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {

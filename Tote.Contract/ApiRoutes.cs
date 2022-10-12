@@ -28,7 +28,7 @@ public class ApiRoutes
         public const string CreateOutcomeBlock = Base + "/outcomeBlocks";
         public const string UpdateOutcomeBlock = Base + "/outcomeBlocks";
         public const string DeleteOutcomeBlock = Base + "/outcomeBlocks/{OutcomeBlockId}";
-        public const string GetOutcomeBlockMarkets = Base + "/outcomeBlocks/{OutcomeBlockId}/markets";
+        public const string GetOutcomeBlockMarkets = Base + "/outcomeBlocks/{id}/markets";
     }
 
     public static class Markets
@@ -37,7 +37,7 @@ public class ApiRoutes
         public const string CreateMarket = Base + "/markets";
         public const string UpdateMarket = Base + "/markets";
         public const string DeleteMarket = Base + "/markets/{MarketId}";
-        public const string GetMarketOutcomes = Base + "/markets/{MarketId}";
+        public const string GetMarketOutcomes = Base + "/markets/{id}/outcomes";
     }
 
     public static class Outcomes
@@ -50,7 +50,7 @@ public class ApiRoutes
 
     public static class Bets
     {
-        public const string GetBetById = Base + "/bets/{BetId}";
+        public const string GetBetById = Base + "/bets/{id}";
         public const string CreateBet = Base + "/bets";
         public const string UpdateBetStatus = Base + "/bets";
         public const string DeleteBet = Base + "/bets/{BetId}";

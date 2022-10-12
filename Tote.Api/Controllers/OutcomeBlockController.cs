@@ -6,6 +6,7 @@ using Tote.Application.OutcomeBlock.Commands.DeleteOutcomeBlock;
 using Tote.Application.OutcomeBlock.Commands.UpdateOutcomeBlock;
 using Tote.Application.OutcomeBlock.Common.Models;
 using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockById;
+using Tote.Application.OutcomeBlock.Queries.GetOutcomeBlockMarkets;
 using Tote.Contracts;
 using Tote.Contracts.OutcomeBlock.Requests;
 using Tote.Contracts.OutcomeBlock.Responses;
@@ -32,6 +33,17 @@ public class OutcomeBlockController : ControllerBase
             token);
 
         var response = foundOutcomeBlock.Adapt<GetOutcomeBlockByIdResponse>();
+
+        return Ok(response);
+    }
+
+    [HttpGet(ApiRoutes.OutcomeBlocks.GetOutcomeBlockMarkets)]
+    public async Task<IActionResult> GetMarkets(Guid id,
+    CancellationToken token)
+    {
+        var response = await _mediator.Send(
+            new GetOutcomeBlockMarketsQuery(id),
+            token);
 
         return Ok(response);
     }
