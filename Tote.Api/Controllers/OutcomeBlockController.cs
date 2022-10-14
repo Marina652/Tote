@@ -24,7 +24,7 @@ public class OutcomeBlockController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet(ApiRoutes.OutcomeBlocks.GetOutcomeBlockById)]
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
@@ -48,7 +48,7 @@ public class OutcomeBlockController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost(ApiRoutes.OutcomeBlocks.CreateOutcomeBlock)]
     public async Task<IActionResult> Create(CreateOutcomeBlockRequest request,
        CancellationToken token)
     {
@@ -66,7 +66,7 @@ public class OutcomeBlockController : ControllerBase
           response);
     }
 
-    [HttpPatch("{id}")]
+    [HttpPatch(ApiRoutes.OutcomeBlocks.UpdateOutcomeBlock)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeBlockRequest request,
      CancellationToken token)
     {
@@ -81,7 +81,7 @@ public class OutcomeBlockController : ControllerBase
     }
 
 
-    [HttpDelete("{id}")]
+    [HttpDelete(ApiRoutes.OutcomeBlocks.DeleteOutcomeBlock)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.Market.Commands.CreateMarket;
+﻿using FluentValidation;
 
-internal class CreateMarketCommandValidator
+namespace Tote.Application.Market.Commands.CreateMarket;
+
+internal class CreateMarketCommandValidator : AbstractValidator<CreateMarketCommand>
 {
+    public CreateMarketCommandValidator()
+    {
+        RuleFor(x => x.NewMarket.Id).NotEmpty();
+    }
 }

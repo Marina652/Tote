@@ -36,7 +36,7 @@ public class BetController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost(ApiRoutes.Bets.CreateBet)]
     public async Task<IActionResult> Create(CreateBetRequest request,
         CancellationToken token)
     {
@@ -54,7 +54,7 @@ public class BetController : ControllerBase
            response);
     }
 
-    [HttpPatch("{id}")]
+    [HttpPatch(ApiRoutes.Bets.UpdateBetStatus)]
     public async Task<IActionResult> UpdateBetStatus([FromRoute] Guid id, [FromBody] UpdateBetRequest request,
         CancellationToken token)
     {
@@ -65,7 +65,7 @@ public class BetController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete(ApiRoutes.Bets.DeleteBet)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

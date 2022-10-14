@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.Market.Queries.GetMarketById;
+﻿using FluentValidation;
 
-internal class GetMarketByIdQueryValidator
+namespace Tote.Application.Market.Queries.GetMarketById;
+
+internal class GetMarketByIdQueryValidator : AbstractValidator<GetMarketByIdQuery>
 {
+    public GetMarketByIdQueryValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty();
+    }
 }

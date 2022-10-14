@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.Market.Commands.DeleteMarket;
+﻿using FluentValidation;
 
-internal class DeleteMarketCommandValidator
+namespace Tote.Application.Market.Commands.DeleteMarket;
+
+internal class DeleteMarketCommandValidator : AbstractValidator<DeleteMarketCommand>
 {
+    public DeleteMarketCommandValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty();
+    }
 }

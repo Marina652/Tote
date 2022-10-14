@@ -1,6 +1,7 @@
 using Tote.Application;
 using Tote.Api;
 using Tote.Infrastructure;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

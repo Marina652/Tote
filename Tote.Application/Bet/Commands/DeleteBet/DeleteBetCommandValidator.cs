@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.Bet.Commands.DeleteBet;
+﻿using FluentValidation;
 
-internal class DeleteBetCommandValidator
+namespace Tote.Application.Bet.Commands.DeleteBet;
+
+internal class DeleteBetCommandValidator : AbstractValidator<DeleteBetCommand>
 {
+    public DeleteBetCommandValidator()
+    {
+        RuleFor(b => b.Id).NotEmpty();
+    }
 }

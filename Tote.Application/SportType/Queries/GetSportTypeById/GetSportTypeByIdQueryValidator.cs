@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.SportType.Queries.GetSportTypeById;
+﻿using FluentValidation;
 
-internal class GetSportTypeByIdQueryValidator
+namespace Tote.Application.SportType.Queries.GetSportTypeById;
+
+internal class GetSportTypeByIdQueryValidator : AbstractValidator<GetSportTypeByIdQuery>
 {
+    public GetSportTypeByIdQueryValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty();
+    }
 }

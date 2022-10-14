@@ -1,5 +1,11 @@
-﻿namespace Tote.Application.SportType.Commands.CreateSportType;
+﻿using FluentValidation;
 
-internal class CreateSportTypeCommandValidator
+namespace Tote.Application.SportType.Commands.CreateSportType;
+
+internal class CreateSportTypeCommandValidator : AbstractValidator<CreateSportTypeCommand>
 {
+    public CreateSportTypeCommandValidator()
+    {
+        RuleFor(x => x.NewSportType.Name).NotEmpty();
+    }
 }

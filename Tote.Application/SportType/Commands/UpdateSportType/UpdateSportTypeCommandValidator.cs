@@ -1,5 +1,13 @@
-﻿namespace Tote.Application.SportType.Commands.UpdateSportType;
+﻿using FluentValidation;
 
-internal class UpdateSportTypeCommandValidator
+namespace Tote.Application.SportType.Commands.UpdateSportType;
+
+internal class UpdateSportTypeCommandValidator : AbstractValidator<UpdateSportTypeCommand>
 {
+    public UpdateSportTypeCommandValidator()
+    {
+        RuleFor(x => x.NewSportType.Id).NotEmpty();
+
+        RuleFor(x => x.NewSportType.Name).NotEmpty();
+    }
 }

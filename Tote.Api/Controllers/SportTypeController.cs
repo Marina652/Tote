@@ -23,7 +23,7 @@ public class SportTypeController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet(ApiRoutes.SportTypes.GetSportTypeById)]
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
@@ -36,7 +36,7 @@ public class SportTypeController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost(ApiRoutes.SportTypes.CreatesportType)]
     public async Task<IActionResult> Create(CreateSportTypeRequest request,
        CancellationToken token)
     {
@@ -54,7 +54,7 @@ public class SportTypeController : ControllerBase
           response);
     }
 
-    [HttpPatch("{id}")]
+    [HttpPatch(ApiRoutes.SportTypes.UpdateSportType)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateSportTypeRequest request,
      CancellationToken token)
     {
@@ -69,7 +69,7 @@ public class SportTypeController : ControllerBase
     }
 
 
-    [HttpDelete("{id}")]
+    [HttpDelete(ApiRoutes.SportTypes.DeleteSportType)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

@@ -6,6 +6,7 @@ using Tote.Application.Outcome.Commands.DeleteOutcome;
 using Tote.Application.Outcome.Commands.UpdateOutcome;
 using Tote.Application.Outcome.Common.Models;
 using Tote.Application.Outcome.Queries.GetOutcomeById;
+using Tote.Contracts;
 using Tote.Contracts.Outcome.Requests;
 using Tote.Contracts.Outcome.Responses;
 
@@ -22,7 +23,7 @@ namespace Tote.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(ApiRoutes.Outcomes.GetOutcomeById)]
         public async Task<IActionResult> Get(Guid id,
           CancellationToken token)
         {
@@ -35,7 +36,7 @@ namespace Tote.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Outcomes.CreateOutcome)]
         public async Task<IActionResult> Create(CreateOutcomeRequest request,
            CancellationToken token)
         {
@@ -53,7 +54,7 @@ namespace Tote.Api.Controllers
               response);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch(ApiRoutes.Outcomes.UpdateOutcome)]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeRequest request,
          CancellationToken token)
         {
@@ -68,7 +69,7 @@ namespace Tote.Api.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete(ApiRoutes.Outcomes.DeleteOutcome)]
         public async Task<IActionResult> Delete(Guid id,
             CancellationToken token)
         {

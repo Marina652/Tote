@@ -23,7 +23,7 @@ public class EventController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet(ApiRoutes.EventRoutes.GetEventById)]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {
@@ -36,7 +36,7 @@ public class EventController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost(ApiRoutes.EventRoutes.CreateEvent)]
     public async Task<IActionResult> Create(CreateEventRequest request,
         CancellationToken token)
     {
@@ -54,8 +54,8 @@ public class EventController : ControllerBase
             response);
     }
 
-    [HttpPatch("{id}")]
-    public async Task<IActionResult> UpdateStatus([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
+    [HttpPatch(ApiRoutes.EventRoutes.UpdateEvent)]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
         CancellationToken token)
     {
         var newEvent = request.Adapt<Event>();
@@ -68,7 +68,7 @@ public class EventController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete(ApiRoutes.EventRoutes.DeleteEvent)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {
