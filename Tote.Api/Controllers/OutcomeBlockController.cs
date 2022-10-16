@@ -14,7 +14,6 @@ using Tote.Contracts.OutcomeBlock.Responses;
 namespace Tote.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class OutcomeBlockController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -25,6 +24,9 @@ public class OutcomeBlockController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.OutcomeBlocks.GetOutcomeBlockById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
@@ -38,6 +40,9 @@ public class OutcomeBlockController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.OutcomeBlocks.GetOutcomeBlockMarkets)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMarkets(Guid id,
     CancellationToken token)
     {
@@ -49,6 +54,9 @@ public class OutcomeBlockController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.OutcomeBlocks.CreateOutcomeBlock)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Create(CreateOutcomeBlockRequest request,
        CancellationToken token)
     {
@@ -67,6 +75,9 @@ public class OutcomeBlockController : ControllerBase
     }
 
     [HttpPatch(ApiRoutes.OutcomeBlocks.UpdateOutcomeBlock)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeBlockRequest request,
      CancellationToken token)
     {
@@ -82,6 +93,9 @@ public class OutcomeBlockController : ControllerBase
 
 
     [HttpDelete(ApiRoutes.OutcomeBlocks.DeleteOutcomeBlock)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

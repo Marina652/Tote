@@ -12,7 +12,6 @@ using Tote.Contracts.Outcome.Responses;
 
 namespace Tote.Api.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class OutcomeController : ControllerBase
     {
@@ -24,6 +23,9 @@ namespace Tote.Api.Controllers
         }
 
         [HttpGet(ApiRoutes.Outcomes.GetOutcomeById)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(Guid id,
           CancellationToken token)
         {
@@ -37,6 +39,9 @@ namespace Tote.Api.Controllers
         }
 
         [HttpPost(ApiRoutes.Outcomes.CreateOutcome)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Create(CreateOutcomeRequest request,
            CancellationToken token)
         {
@@ -55,6 +60,9 @@ namespace Tote.Api.Controllers
         }
 
         [HttpPatch(ApiRoutes.Outcomes.UpdateOutcome)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeRequest request,
          CancellationToken token)
         {
@@ -70,6 +78,9 @@ namespace Tote.Api.Controllers
 
 
         [HttpDelete(ApiRoutes.Outcomes.DeleteOutcome)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id,
             CancellationToken token)
         {

@@ -13,7 +13,6 @@ using Tote.Contracts;
 namespace Tote.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class EventController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -24,6 +23,9 @@ public class EventController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.EventRoutes.GetEventById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {
@@ -37,6 +39,9 @@ public class EventController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.EventRoutes.CreateEvent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Create(CreateEventRequest request,
         CancellationToken token)
     {
@@ -55,6 +60,9 @@ public class EventController : ControllerBase
     }
 
     [HttpPatch(ApiRoutes.EventRoutes.UpdateEvent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
         CancellationToken token)
     {
@@ -69,6 +77,9 @@ public class EventController : ControllerBase
     }
 
     [HttpDelete(ApiRoutes.EventRoutes.DeleteEvent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

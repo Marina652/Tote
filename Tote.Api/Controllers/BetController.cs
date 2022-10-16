@@ -13,7 +13,6 @@ using Tote.Contracts.Bet.Responses;
 namespace Tote.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class BetController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -24,6 +23,9 @@ public class BetController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.Bets.GetBetById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id,
         CancellationToken token)
     {
@@ -37,6 +39,9 @@ public class BetController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.Bets.CreateBet)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Create(CreateBetRequest request,
         CancellationToken token)
     {
@@ -55,6 +60,9 @@ public class BetController : ControllerBase
     }
 
     [HttpPatch(ApiRoutes.Bets.UpdateBetStatus)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateBetStatus([FromRoute] Guid id, [FromBody] UpdateBetRequest request,
         CancellationToken token)
     {
@@ -66,6 +74,9 @@ public class BetController : ControllerBase
     }
 
     [HttpDelete(ApiRoutes.Bets.DeleteBet)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

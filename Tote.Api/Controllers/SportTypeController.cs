@@ -13,7 +13,6 @@ using Tote.Contracts.Event.SportType.Responses;
 namespace Tote.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class SportTypeController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -24,6 +23,9 @@ public class SportTypeController : ControllerBase
     }
 
     [HttpGet(ApiRoutes.SportTypes.GetSportTypeById)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id,
       CancellationToken token)
     {
@@ -37,6 +39,9 @@ public class SportTypeController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.SportTypes.CreatesportType)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Create(CreateSportTypeRequest request,
        CancellationToken token)
     {
@@ -55,6 +60,9 @@ public class SportTypeController : ControllerBase
     }
 
     [HttpPatch(ApiRoutes.SportTypes.UpdateSportType)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateSportTypeRequest request,
      CancellationToken token)
     {
@@ -70,6 +78,9 @@ public class SportTypeController : ControllerBase
 
 
     [HttpDelete(ApiRoutes.SportTypes.DeleteSportType)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(Guid id,
         CancellationToken token)
     {

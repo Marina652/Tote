@@ -2,6 +2,7 @@ using Tote.Application;
 using Tote.Api;
 using Tote.Infrastructure;
 using FluentValidation.AspNetCore;
+using Tote.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -29,5 +32,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();
