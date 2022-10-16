@@ -2,7 +2,7 @@
 using System.Reflection;
 using FluentValidation;
 using MediatR;
-using FluentValidation.AspNetCore;
+using Tote.Application.Behaviors;
 
 namespace Tote.Application;
 
@@ -14,6 +14,8 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(),
             includeInternalTypes:true);
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         return services;
     }
