@@ -1,4 +1,4 @@
-﻿using Mapster;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.OutcomeBlock.Commands.CreateOutcomeBlock;
@@ -17,10 +17,12 @@ namespace Tote.Api.Controllers;
 public class OutcomeBlockController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public OutcomeBlockController(IMediator mediator)
+    public OutcomeBlockController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet(ApiRoutes.OutcomeBlocks.GetOutcomeBlockById)]
@@ -34,7 +36,7 @@ public class OutcomeBlockController : ControllerBase
             new GetOutcomeBlockByIdQuery(id),
             token);
 
-        var response = foundOutcomeBlock.Adapt<GetOutcomeBlockByIdResponse>();
+        var response = _mapper.Map<GetOutcomeBlockByIdResponse>(foundOutcomeBlock);
 
         return Ok(response);
     }
@@ -61,7 +63,7 @@ public class OutcomeBlockController : ControllerBase
        CancellationToken token)
     {
         var createdId = await _mediator.Send(
-            new CreateOutcomeBlockCommand(request.Adapt<OutcomeBlock>()),
+            new CreateOutcomeBlockCommand(_mapper.Map<OutcomeBlock>(request)),
             token);
 
         var response = new CreateOutcomeBlockResponse
@@ -81,7 +83,7 @@ public class OutcomeBlockController : ControllerBase
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeBlockRequest request,
      CancellationToken token)
     {
-        var newOutcomeBlock = request.Adapt<OutcomeBlock>();
+        var newOutcomeBlock = _mapper.Map<OutcomeBlock>(request);
         newOutcomeBlock.Id = id;
 
         await _mediator.Send(

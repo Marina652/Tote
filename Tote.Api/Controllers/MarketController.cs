@@ -1,4 +1,4 @@
-﻿using Mapster;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Market.Commands.CreateMarket;
@@ -17,10 +17,12 @@ namespace Tote.Api.Controllers;
 public class MarketController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public MarketController(IMediator mediator)
+    public MarketController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet(ApiRoutes.Markets.GetMarketById)]
@@ -34,7 +36,7 @@ public class MarketController : ControllerBase
             new GetMarketByIdQuery(id),
             token);
 
-        var response = foundMarket.Adapt<GetMarketByIdResponse>();
+        var response = _mapper.Map<GetMarketByIdResponse>(foundMarket);
 
         return Ok(response);
     }
@@ -61,7 +63,7 @@ public class MarketController : ControllerBase
        CancellationToken token)
     {
         var createdId = await _mediator.Send(
-            new CreateMarketCommand(request.Adapt<Market>()),
+            new CreateMarketCommand(_mapper.Map<Market>(request)),
             token);
 
         var response = new CreateMarketResponse
@@ -81,7 +83,7 @@ public class MarketController : ControllerBase
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMarketRequest request,
      CancellationToken token)
     {
-        var newMarket = request.Adapt<Market>();
+        var newMarket = _mapper.Map<Market>(request);
         newMarket.Id = id;
 
         await _mediator.Send(

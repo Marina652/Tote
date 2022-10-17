@@ -1,4 +1,4 @@
-﻿using Mapster;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Bet.Commands.CreateBet;
@@ -16,10 +16,12 @@ namespace Tote.Api.Controllers;
 public class BetController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public BetController(IMediator mediator)
+    public BetController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet(ApiRoutes.Bets.GetBetById)]
@@ -33,7 +35,7 @@ public class BetController : ControllerBase
             new GetBetByIdQuery(id),
             token);
 
-        var response = foundBet.Adapt<GetBetByIdResponce>();
+        var response = _mapper.Map<GetBetByIdResponce>(foundBet);
 
         return Ok(response);
     }
@@ -46,7 +48,7 @@ public class BetController : ControllerBase
         CancellationToken token)
     {
         var createdId = await _mediator.Send(
-            new CreateBetCommand(request.Adapt<Bet>()),
+            new CreateBetCommand(_mapper.Map<Bet>(request)),
             token);
 
         var response = new CreateBetResponse

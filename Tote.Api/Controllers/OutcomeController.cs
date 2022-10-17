@@ -1,4 +1,4 @@
-﻿using Mapster;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tote.Application.Outcome.Commands.CreateOutcome;
@@ -16,10 +16,12 @@ namespace Tote.Api.Controllers
     public class OutcomeController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public OutcomeController(IMediator mediator)
+        public OutcomeController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpGet(ApiRoutes.Outcomes.GetOutcomeById)]
@@ -33,7 +35,7 @@ namespace Tote.Api.Controllers
                 new GetOutcomeByIdQuery(id),
                 token);
 
-            var response = foundOutcome.Adapt<GetOutcomeByIdResponse>();
+            var response = _mapper.Map<GetOutcomeByIdResponse>(foundOutcome);
 
             return Ok(response);
         }
@@ -46,7 +48,7 @@ namespace Tote.Api.Controllers
            CancellationToken token)
         {
             var createdId = await _mediator.Send(
-                new CreateOutcomeCommand(request.Adapt<Outcome>()),
+                new CreateOutcomeCommand(_mapper.Map<Outcome>(request)),
                 token);
 
             var response = new CreateOutcomeResponse
@@ -66,7 +68,7 @@ namespace Tote.Api.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOutcomeRequest request,
          CancellationToken token)
         {
-            var newOutcome = request.Adapt<Outcome>();
+            var newOutcome = _mapper.Map<Outcome>(request);
             newOutcome.Id = id;
 
             await _mediator.Send(

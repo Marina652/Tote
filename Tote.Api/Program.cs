@@ -3,6 +3,9 @@ using Tote.Api;
 using Tote.Infrastructure;
 using FluentValidation.AspNetCore;
 using Tote.Api.Middleware;
+using AutoMapper;
+using System.Reflection;
+using Tote.Api.MappingProfiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+//builder.Services.AddAutoMapper(typeof(BetProfiles).Assembly);
 
 var app = builder.Build();
 

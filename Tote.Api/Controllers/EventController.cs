@@ -5,10 +5,10 @@ using Tote.Application.Event.Commands.DeleteEvent;
 using Tote.Application.Event.Commands.UpdateEvent;
 using Tote.Application.Event.Common.Models;
 using Tote.Application.Event.Queries.GetEventById;
-using Mapster;
 using Tote.Contracts.Event.Responses;
 using Tote.Contracts.Event.Requests;
 using Tote.Contracts;
+using AutoMapper;
 
 namespace Tote.Api.Controllers;
 
@@ -16,10 +16,12 @@ namespace Tote.Api.Controllers;
 public class EventController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public EventController(IMediator mediator)
+    public EventController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet(ApiRoutes.EventRoutes.GetEventById)]
@@ -33,7 +35,7 @@ public class EventController : ControllerBase
             new GetEventByIdQuery(id),
             token);
 
-        var response = foundEvent.Adapt<GetEventByIdResponse>();
+        var response = _mapper.Map<GetEventByIdResponse>(foundEvent);
 
         return Ok(response);
     }
@@ -46,7 +48,7 @@ public class EventController : ControllerBase
         CancellationToken token)
     {
         var createdId = await _mediator.Send(
-            new CreateEventCommand(request.Adapt<Event>()),
+            new CreateEventCommand(_mapper.Map<Event>(request)),
             token);
 
         var response = new CreateEventResponse
@@ -66,7 +68,7 @@ public class EventController : ControllerBase
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateEventRequest request,
         CancellationToken token)
     {
-        var newEvent = request.Adapt<Event>();
+        var newEvent = _mapper.Map<Event>(request);
         newEvent.Id = id;
 
         await _mediator.Send(
